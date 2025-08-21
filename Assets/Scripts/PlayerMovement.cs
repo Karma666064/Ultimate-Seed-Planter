@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Parametre du Player")]
-    public float moveSpeed = 5f;
+    public float moveSpeed = 6f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -16,11 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Catch the inputs for the x & y axis deplacements
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
+        moveInput = Vector2.zero;
 
-        // Normalize the values
+        // Déplacement clavier
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.wKey.isPressed) { moveInput.y += 1; }
+            if (Keyboard.current.aKey.isPressed) { moveInput.x -= 1; } 
+            if (Keyboard.current.sKey.isPressed) { moveInput.y -= 1; }
+            if (Keyboard.current.dKey.isPressed) { moveInput.x += 1; }
+        }
+
+        // Evite la diagonale plus rapide
         moveInput = moveInput.normalized;
     }
     void FixedUpdate()
