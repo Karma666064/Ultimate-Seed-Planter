@@ -25,27 +25,16 @@ public class PlayerMovement : MonoBehaviour
         // Déplacement clavier
         if (Keyboard.current != null)
         {
-            if (Keyboard.current.wKey.isPressed)
-            {
-                moveInput.y += 1;
-            }
-            if (Keyboard.current.aKey.isPressed)
-            {
-                moveInput.x -= 1;
-            } 
-            if (Keyboard.current.sKey.isPressed)
-            {
-                moveInput.y -= 1;
-            }
-            if (Keyboard.current.dKey.isPressed)
-            {
-                moveInput.x += 1;
-            }
+            if (Keyboard.current.wKey.isPressed) moveInput.y += 1;
+            if (Keyboard.current.aKey.isPressed) moveInput.x -= 1; 
+            if (Keyboard.current.sKey.isPressed) moveInput.y -= 1;
+            if (Keyboard.current.dKey.isPressed) moveInput.x += 1;
         }
 
         // Evite la diagonale plus rapide
         moveInput = moveInput.normalized;
 
+        // Animation controller
         if (moveInput != Vector2.zero)
         {
             animator.SetBool("isMoving", true);
