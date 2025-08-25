@@ -227561,6 +227561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cada3e84d38ea4b8f32f844ee7aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActions
+  terreLabourer: {fileID: 3938894904574216544, guid: a36683a4420c2e74bb9bff66aa1064e5, type: 3}
   actualTiles: {fileID: 0}
   tools: 0
 --- !u!114 &1885764844
