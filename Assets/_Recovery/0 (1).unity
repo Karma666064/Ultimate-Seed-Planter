@@ -4350,8 +4350,7 @@ GameObject:
   - component: {fileID: 1782319967}
   - component: {fileID: 1782319969}
   - component: {fileID: 1782319968}
-  - component: {fileID: 1782319970}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227326,44 +227325,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!19719996 &1782319970
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782319966}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0
-  m_UseDelaunayMesh: 0
 --- !u!1 &1885764836
 GameObject:
   m_ObjectHideFlags: 0
@@ -227380,8 +227341,6 @@ GameObject:
   - component: {fileID: 1885764844}
   - component: {fileID: 1885764843}
   - component: {fileID: 1885764845}
-  - component: {fileID: 1885764846}
-  - component: {fileID: 1885764847}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -227506,7 +227465,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -227561,8 +227520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cada3e84d38ea4b8f32f844ee7aa46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActions
-  actualTiles: {fileID: 0}
-  tools: 0
 --- !u!114 &1885764844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227589,75 +227546,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTriggers
   nearWater: 0
---- !u!114 &1885764846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885764836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae28f79d9ec78242abe1c83826882b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  seedCount: 5
-  maxWater: 10
-  currentWater: 10
---- !u!114 &1885764847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885764836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 931b2766-9f8a-454c-8f47-82c3d39d885c
-    m_ActionName: 'Player/Move[/Keyboard/z,/Keyboard/q,/Keyboard/s,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 11921c5b-97e8-4395-9681-ed91f935ed3b
-    m_ActionName: 'Player/Interactions[/Keyboard/r,/Keyboard/f]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b648173b-e6fb-45d8-a0c3-c437c628b702
-    m_ActionName: 'Player/Interface[/Keyboard/e,/Keyboard/m]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c0261fb9-cb43-44f8-910b-e9324e10eb82
-    m_ActionName: Player/Mouse
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 20086558-fd81-4d9a-83ae-77d67d7ad770
-    m_ActionName: 'UI/Navigation[/Keyboard/z,/Keyboard/q,/Keyboard/s,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4f122b57-0d4d-4659-a33a-a807063b9d83
-    m_ActionName: 'UI/Validation/Cancel[/Keyboard/space,/Keyboard/enter,/Keyboard/numpadEnter,/Keyboard/backspace,/Keyboard/escape]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1910915331
 GameObject:
   m_ObjectHideFlags: 0

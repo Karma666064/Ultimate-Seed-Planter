@@ -1,19 +1,19 @@
 using TMPro;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class PlayerInventory : MonoBehaviour
 {
-    public int seedCount = 5; // Commence avec 5 graines
+    [Header("Variable")]
+    public int seedCount = 5;
     public int maxWater = 10;
     public int currentWater = 10;
-    public Inventory inventory;
-    public TMP_Text seedText;
-    public TMP_Text waterText;
+    //public TMP_Text seedText;
+    //public TMP_Text waterText;
 
     void Update()
     {
-        seedText.text = "Seeds: " + inventory.seedCount;
-        waterText.text = "Water: " + currentWater + "/" + maxWater;
+        //seedText.text = "Seeds: " + seedCount;
+        //waterText.text = "Water: " + currentWater + "/" + maxWater;
     }
 
     public void AddSeeds(int amount)
@@ -23,7 +23,15 @@ public class Inventory : MonoBehaviour
 
     public void RefillWater()
     {
-        currentWater = maxWater;
+        if (currentWater == maxWater)
+        {
+            Debug.Log("Water is full!");
+        }
+        else
+        {
+            currentWater = maxWater;
+            Debug.Log("Refill succesfully!");
+        }
     }
 
     public bool UseSeed()

@@ -1,13 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GreenbotController : MonoBehaviour
+public class PlayerMouvemnt : MonoBehaviour
 {
-    [Header("Param�tres du Player")]
+    [Header("Paramètres du Player")]
     public float moveSpeed = 6f;
-
-    [Header("Inventaires")]
-    public Inventory inventory;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -22,7 +19,7 @@ public class GreenbotController : MonoBehaviour
 
     private void Update()
     {
-        // D�placement clavier
+        // Déplacement clavier
         moveInput = Vector2.zero;
         if (Keyboard.current != null)
         {
@@ -47,23 +44,6 @@ public class GreenbotController : MonoBehaviour
             animator.SetBool("isMoving", false);
             animator.SetFloat("moveX", lastMoveDir.x);
             animator.SetFloat("moveY", lastMoveDir.y);
-        }
-
-        // Actions
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            if (inventory.UseSeed())
-                Debug.Log("Graine plant�e !");
-            else
-                Debug.Log("Plus de graines !");
-        }
-
-        if (Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            if (inventory.UseWater())
-                Debug.Log("Plante arros�e !");
-            else
-                Debug.Log("Plus d'eau !");
         }
     }
 
