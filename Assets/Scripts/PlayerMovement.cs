@@ -1,28 +1,30 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class GreenbotController : MonoBehaviour
 {
-    [Header("Parametre du Player")]
+    [Header("Paramï¿½tres du Player")]
     public float moveSpeed = 6f;
+
+    [Header("Inventaires")]
+    public Inventory inventory;
+    public WaterInventory waterInventory;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 lastMoveDir;
     private Animator animator;
 
-    void Start()
+    private void Start()
     {
-        // Catch the rigidbody component of the player component
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
+        // Dï¿½placement clavier
         moveInput = Vector2.zero;
-
-        // Déplacement clavier
         if (Keyboard.current != null)
         {
             if (Keyboard.current.wKey.isPressed) moveInput.y += 1;
@@ -30,8 +32,6 @@ public class PlayerMovement : MonoBehaviour
             if (Keyboard.current.sKey.isPressed) moveInput.y -= 1;
             if (Keyboard.current.dKey.isPressed) moveInput.x += 1;
         }
-
-        // Evite la diagonale plus rapide
         moveInput = moveInput.normalized;
 
         // Animation controller
@@ -49,10 +49,27 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("moveX", lastMoveDir.x);
             animator.SetFloat("moveY", lastMoveDir.y);
         }
+
+        // Actions
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            if (inventory.UseSeed())
+                Debug.Log("Graine plantï¿½e !");
+            else
+                Debug.Log("Plus de graines !");
+        }
+
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            if (waterInventory.UseWater())
+                Debug.Log("Plante arrosï¿½e !");
+            else
+                Debug.Log("Plus d'eau !");
+        }
     }
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
-        // Move the player
         rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveInput);
     }
 }
