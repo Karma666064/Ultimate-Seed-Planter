@@ -2,16 +2,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-    public string levelToLoad;
-
+    public string sceneToLoad;
     public GameObject settingsWindow;
+
     public void StartGame()
     {
-        SceneManager.LoadScene(levelToLoad);
+        SceneManager.LoadScene(sceneToLoad);
     }
-    public void SettingButton()
+    public void SettingOpen()
     {
         settingsWindow.SetActive(true);
+    }
+
+    public void SettingClose()
+    {
+        settingsWindow.SetActive(false);
     }
     public void QuitGame()
     {

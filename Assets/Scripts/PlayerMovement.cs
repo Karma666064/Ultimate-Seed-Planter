@@ -8,7 +8,6 @@ public class GreenbotController : MonoBehaviour
 
     [Header("Inventaires")]
     public Inventory inventory;
-    public WaterInventory waterInventory;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -61,7 +60,7 @@ public class GreenbotController : MonoBehaviour
 
         if (Keyboard.current.rKey.wasPressedThisFrame)
         {
-            if (waterInventory.UseWater())
+            if (inventory.UseWater())
                 Debug.Log("Plante arros�e !");
             else
                 Debug.Log("Plus d'eau !");
