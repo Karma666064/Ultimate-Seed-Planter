@@ -6,27 +6,32 @@ public class Plant : MonoBehaviour
 {
     public List<GameObject> tree = new List<GameObject>();
     public int state;
+    public float growthTime = 1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         StartCoroutine(Grow());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public IEnumerator Grow()
     {
+        int treeStatesCount = tree.Count;
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(growthTime);
+
+            if (state + 1 >= treeStatesCount)
+            {
+                Debug.Log("Je me casse");
+                break;
+            }
 
             tree[state].SetActive(false);
             state++;
             tree[state].SetActive(true);
+
+            Debug.Log("treeStatesCount: " + treeStatesCount);
+            Debug.Log("state: " + state);
         }
     }
 }

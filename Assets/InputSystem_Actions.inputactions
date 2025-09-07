@@ -35,9 +35,9 @@
                 },
                 {
                     "name": "Mouse",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "c0261fb9-cb43-44f8-910b-e9324e10eb82",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -145,8 +145,8 @@
                 },
                 {
                     "name": "",
-                    "id": "87d42291-d620-4e03-bc20-959be05a963f",
-                    "path": "<Mouse>/position",
+                    "id": "9b01e6b5-d6c1-4957-b3e7-d5378643355c",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

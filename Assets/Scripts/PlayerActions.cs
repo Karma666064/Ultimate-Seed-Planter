@@ -8,9 +8,12 @@ public class PlayerActions : MonoBehaviour
     private PlayerInventory inventory;
     private PlayerTriggers triggers;
     private PlayerInput input;
-    Tilemap tilemap;
-    public GameObject terreLabourer;
+    private Rigidbody2D rb;
 
+    public GameObject terreLabourer;
+    public int maxDistance = 4;
+
+    Tilemap tilemap;
     Vector2 mousePos;
 
     public GameObject actualTiles;
@@ -20,55 +23,78 @@ public class PlayerActions : MonoBehaviour
     {
         inventory = GetComponent<PlayerInventory>();
         triggers = GetComponent<PlayerTriggers>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
-    {
-        // Actions avec le nouveau Input System
-        if (Keyboard.current != null)
-        {
-            //if (triggers.nearWater && Keyboard.current.eKey.wasPressedThisFrame)
-            //{
-            //    inventory.RefillWater();
-            //}
+    //void Update()
+    //{
+    //    // Actions avec le nouveau Input System
+    //    if (Keyboard.current != null)
+    //    {
+    //        //if (triggers.nearWater && Keyboard.current.eKey.wasPressedThisFrame)
+    //        //{
+    //        //    inventory.RefillWater();
+    //        //}
 
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-            {
-                if (tools == Tools.Hoe)
-                {
-                    Instantiate(terreLabourer, Vector3.zero, Quaternion.identity);
-                    //tilemap.SetTile()
-                    Debug.Log("Plant a seed");
-                }
-                if (tools == Tools.SeedBag)
-                {
-                    Debug.Log("Plant a Seed Bag");
-                }
-                if (tools == Tools.WateringCan)
-                {
-                    Debug.Log("Plant a WateringCan");
-                }
-            }
+    //    }
+    //}
+
+    public void Mouse(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Vector2 mouseScreenPos = Input.mousePosition;
+            
+            mousePos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+
+            Debug.Log(mousePos);
+
+            Plant(mousePos);
+
         }
     }
 
-    private void FixedUpdate()
+    public void Plant(Vector3 worldPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2 (mousePos.x, mousePos.y), -Vector2.up);
+        Vector3 spawnPos = Vector3.zero;
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(worldPos.x, worldPos.y), -Vector2.up);
 
         // Récuperer la tiles
         if (hit)
         {
             actualTiles = hit.collider.gameObject;
-            //gridSelection = hit.collider.gameObject.GetComponent<GridSelection>();
-        }
-    }
+            tilemap = hit.collider.gameObject.GetComponent<Tilemap>();
 
-    public void Mouse(InputAction.CallbackContext context)
-    {
-        if (context.performed)
+            if (tilemap != null)
+            {
+                Vector3Int cell = tilemap.WorldToCell(hit.point);
+                Vector2 playerPos = rb.position;
+
+                spawnPos = tilemap.GetCellCenterWorld(cell);
+
+                if (Vector2.Distance(playerPos, spawnPos) > maxDistance)
+                {
+                    return;
+                }
+
+                // check position du perso et si ya terreLabourrer avec le spawnPos
+            }
+            else { return; }
+        }
+
+        if (tools == Tools.Hoe)
         {
-            mousePos = context.ReadValue<Vector2>();
+            Instantiate(terreLabourer, spawnPos, Quaternion.identity);
+            //tilemap.SetTile()
+            Debug.Log("Plant a seed");
+        }
+        if (tools == Tools.SeedBag)
+        {
+            Debug.Log("Plant a Seed Bag");
+        }
+        if (tools == Tools.WateringCan)
+        {
+            Debug.Log("Plant a WateringCan");
         }
     }
 }

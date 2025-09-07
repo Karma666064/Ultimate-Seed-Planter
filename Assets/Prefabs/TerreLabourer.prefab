@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4453705279317190695}
   - component: {fileID: 855515531701219570}
-  m_Layer: 0
-  m_Name: State4
+  m_Layer: 8
+  m_Name: State5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4652486491411619603, guid: cfc9ef0699eaf7144a9893459472b8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474330903706554236}
   - component: {fileID: 4910543590668804941}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: State2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -3267802180754169167, guid: cfc9ef0699eaf7144a9893459472b8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -191,7 +191,8 @@ GameObject:
   - component: {fileID: 2265168855990507466}
   - component: {fileID: 4712618367746928938}
   - component: {fileID: 2914921884309911103}
-  m_Layer: 0
+  - component: {fileID: 7306206022883867154}
+  m_Layer: 8
   m_Name: TerreLabourer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,8 +215,8 @@ Transform:
   - {fileID: 7312754434416027090}
   - {fileID: 4474330903706554236}
   - {fileID: 9159078214760882019}
-  - {fileID: 4453705279317190695}
   - {fileID: 4252636197727506576}
+  - {fileID: 4453705279317190695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4712618367746928938
@@ -292,9 +293,56 @@ MonoBehaviour:
   - {fileID: 8970517099120761671}
   - {fileID: 2696382298803222183}
   - {fileID: 4752991149974986472}
-  - {fileID: 1186998287668286618}
   - {fileID: 5190694220014505445}
+  - {fileID: 1186998287668286618}
   state: 0
+  growthTime: 5
+--- !u!61 &7306206022883867154
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938894904574216544}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5014974}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.15}
+    oldSize: {x: 0.6875, y: 0.4375}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.0245895, y: 3.0254018}
+  m_EdgeRadius: 0
 --- !u!1 &4752991149974986472
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9159078214760882019}
   - component: {fileID: 8499048522287828241}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: State3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +421,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -4574371936455361759, guid: cfc9ef0699eaf7144a9893459472b8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -395,8 +443,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4252636197727506576}
   - component: {fileID: 2660033949048110037}
-  m_Layer: 0
-  m_Name: State5
+  m_Layer: 8
+  m_Name: State4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +511,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 31694560097805967, guid: cfc9ef0699eaf7144a9893459472b8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -485,7 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7312754434416027090}
   - component: {fileID: 5189607650574629325}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: State1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +601,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 501674891198874538, guid: cfc9ef0699eaf7144a9893459472b8fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
