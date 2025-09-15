@@ -10,6 +10,7 @@ public class PlayerMouvemnt : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lastMoveDir;
     private Animator animator;
+    private bool authorizeToMove = true;
 
     private void Start()
     {
@@ -17,20 +18,23 @@ public class PlayerMouvemnt : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        // Déplacement clavier
-        moveInput = Vector2.zero;
-        if (Keyboard.current != null)
+        if (authorizeToMove)
         {
-            if (Keyboard.current.wKey.isPressed) moveInput.y += 1;
-            if (Keyboard.current.aKey.isPressed) moveInput.x -= 1; 
-            if (Keyboard.current.sKey.isPressed) moveInput.y -= 1;
-            if (Keyboard.current.dKey.isPressed) moveInput.x += 1;
-        }
-        moveInput = moveInput.normalized;
+            moveInput = Vector2.zero;
 
-        // Animation controller
+            if (Input.GetKey(KeyCode.W)) moveInput.y += 1;
+            if (Input.GetKey(KeyCode.A)) moveInput.x -= 1;
+            if (Input.GetKey(KeyCode.S)) moveInput.y -= 1;
+            if (Input.GetKey(KeyCode.D)) moveInput.x += 1;
+
+            moveInput = moveInput.normalized;
+
+            Move();
+        }
+
+        //Animation controller
         if (moveInput != Vector2.zero)
         {
             animator.SetBool("isMoving", true);
@@ -47,7 +51,7 @@ public class PlayerMouvemnt : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void Move()
     {
         rb.MovePosition(rb.position + moveSpeed * Time.fixedDeltaTime * moveInput);
     }

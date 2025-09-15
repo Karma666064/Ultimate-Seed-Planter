@@ -1,100 +1,85 @@
-using UnityEditor.Tilemaps;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class PlayerActions : MonoBehaviour
 {
-    private PlayerInventory inventory;
-    private PlayerTriggers triggers;
-    private PlayerInput input;
-    private Rigidbody2D rb;
+    [Header("Growth Values")]
+    public float growthTime;
 
-    public GameObject terreLabourer;
-    public int maxDistance = 4;
+    [Header("Tilemaps & Tiles")]
+    public Tilemap groundTilemap;
+    public Tilemap treesTilemap;
+    public TileBase tileDirt;
+    
+    [Header("Player")]
+    public Transform player;
+    public int maxPlantDistance = 5;
 
-    Tilemap tilemap;
-    Vector2 mousePos;
-
-    public GameObject actualTiles;
-    public enum Tools { Hoe, SeedBag, WateringCan}
-    public Tools tools;
-    void Start()
+    [Header("Lists")]
+    public List<Vector3Int> plantedTrees = new List<Vector3Int>();
+    public TileBase[] growthTreeTiles;
+    private static readonly Vector3Int[] neighbourOffsets = new Vector3Int[]
     {
-        inventory = GetComponent<PlayerInventory>();
-        triggers = GetComponent<PlayerTriggers>();
-        rb = GetComponent<Rigidbody2D>();
-    }
+        new Vector3Int( 1, 0, 0),
+        new Vector3Int( 1, 1, 0),
+        new Vector3Int( 0, 1, 0),
+        new Vector3Int(-1, 1, 0),
+        new Vector3Int(-1, 0, 0),
+        new Vector3Int(-1, -1, 0),
+        new Vector3Int( 0, -1, 0),
+        new Vector3Int( 1, -1, 0)
+    };
 
-    //void Update()
-    //{
-    //    // Actions avec le nouveau Input System
-    //    if (Keyboard.current != null)
-    //    {
-    //        //if (triggers.nearWater && Keyboard.current.eKey.wasPressedThisFrame)
-    //        //{
-    //        //    inventory.RefillWater();
-    //        //}
-
-    //    }
-    //}
-
-    public void Mouse(InputAction.CallbackContext context)
+    private void Update()
     {
-        if (context.started)
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mouseScreenPos = Input.mousePosition;
-            
-            mousePos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int cellPos = groundTilemap.WorldToCell(mouseWorldPos);
+            TileBase clickedTile = groundTilemap.GetTile(cellPos);
 
-            Debug.Log(mousePos);
-
-            Plant(mousePos);
-
-        }
-    }
-
-    public void Plant(Vector3 worldPos)
-    {
-        Vector3 spawnPos = Vector3.zero;
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(worldPos.x, worldPos.y), -Vector2.up);
-
-        // Récuperer la tiles
-        if (hit)
-        {
-            actualTiles = hit.collider.gameObject;
-            tilemap = hit.collider.gameObject.GetComponent<Tilemap>();
-
-            if (tilemap != null)
+            if (clickedTile != null && clickedTile == tileDirt)
             {
-                Vector3Int cell = tilemap.WorldToCell(hit.point);
-                Vector2 playerPos = rb.position;
+                Vector3Int playerCell = groundTilemap.WorldToCell(player.position);
+                int distance = Mathf.Max(Mathf.Abs(cellPos.x - playerCell.x), Mathf.Abs(cellPos.y - playerCell.y));
 
-                spawnPos = tilemap.GetCellCenterWorld(cell);
-
-                if (Vector2.Distance(playerPos, spawnPos) > maxDistance)
+                if (distance > maxPlantDistance)
                 {
+                    Debug.Log("Trop loin pour planter un arbre ! Distance = " + distance);
                     return;
                 }
 
-                // check position du perso et si ya terreLabourrer avec le spawnPos
+                if (!plantedTrees.Contains(cellPos))
+                {
+                    foreach (var offset in neighbourOffsets)
+                    {
+                        Vector3Int neighbourPos = cellPos + offset;
+                        if (plantedTrees.Contains(neighbourPos))
+                        {
+                            Debug.Log("Impossible de planter : un arbre est déjà à côté !");
+                            return;
+                        }
+                    }
+
+                    StartCoroutine(GrowthTree(cellPos));
+                    plantedTrees.Add(cellPos);
+
+                    Debug.Log("Tree added! : " + cellPos);
+                }
             }
-            else { return; }
+        }
+    }
+
+    public IEnumerator GrowthTree (Vector3Int cellPos)
+    {
+        for (int i = 0; i < growthTreeTiles.Length; i++)
+        {
+            treesTilemap.SetTile(cellPos, growthTreeTiles[i]);
+            yield return new WaitForSeconds(growthTime);
         }
 
-        if (tools == Tools.Hoe)
-        {
-            Instantiate(terreLabourer, spawnPos, Quaternion.identity);
-            //tilemap.SetTile()
-            Debug.Log("Plant a seed");
-        }
-        if (tools == Tools.SeedBag)
-        {
-            Debug.Log("Plant a Seed Bag");
-        }
-        if (tools == Tools.WateringCan)
-        {
-            Debug.Log("Plant a WateringCan");
-        }
+        yield break;
     }
 }
