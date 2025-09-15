@@ -11784,7 +11784,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerActions
   terreLabourer: {fileID: 3938894904574216544, guid: a36683a4420c2e74bb9bff66aa1064e5, type: 3}
+<<<<<<< HEAD
   maxDistance: 4
+=======
+>>>>>>> d00e5312d201381b844662da69280c28a75e9de0
   actualTiles: {fileID: 0}
   tools: 0
 --- !u!114 &1885764844
